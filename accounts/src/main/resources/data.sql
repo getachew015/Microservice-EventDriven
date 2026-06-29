@@ -1,0 +1,49 @@
+INSERT INTO COMM_BANKING_SYSTEM.CUSTOMERSTBL (
+    CUSTOMER_ID,
+    FIRST_NAME,
+    LAST_NAME,
+    EMAIL,
+    PHONE_NUMBER,
+    STATUS,
+    CREATED_BY,
+    CREATED_AT,
+    UPDATED_BY,
+    UPDATED_AT
+) VALUES (
+    1000,
+    'John',
+    'Doe',
+    'john.doe@email.com',
+    '513-555-0199',
+    'ACTIVE',
+    'SYSTEM',
+    CURRENT_TIMESTAMP,
+    'SYSTEM',
+    CURRENT_TIMESTAMP
+);
+
+INSERT INTO COMM_BANKING_SYSTEM.ACCOUNTSTBL (
+    ACCOUNT_ID,
+    CUSTOMER_ID,
+    ACCOUNT_NUMBER,
+    ACCOUNT_TYPE,
+    BALANCE,
+    STATUS,
+    CREATED_BY,
+    CREATED_AT,
+    UPDATED_BY,
+    UPDATED_AT
+)
+VALUES (
+    1101,                  -- ACCOUNT_ID
+    1000,                -- CUSTOMER_ID
+    '987654321-00890',    -- ACCOUNT_NUMBER
+    'CHECKING',         -- ACCOUNT_TYPE
+    3233.50,            -- BALANCE
+    'OPEN',           -- STATUS
+    'SYSTEM',      -- CREATED_BY
+    CURRENT_TIMESTAMP,  -- CREATED_AT
+    'SYSTEM',      -- UPDATED_BY
+    CURRENT_TIMESTAMP   -- UPDATED_AT
+);
+

@@ -4,6 +4,15 @@ spring:
   application:
     name: accounts
 
+  mvc:
+    api-version:
+      strategy:
+      path-segment: 1
+
+  output:
+    ansi:
+      enabled: always
+
   config:
     import: "optional:configserver:"
 
@@ -19,8 +28,9 @@ spring:
       hibernate:
         show_sql: false
         format_sql: false
+        default_schema: COMM_BANKING_SYSTEM
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
   h2:
     console:
       enabled: true

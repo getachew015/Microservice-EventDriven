@@ -3,6 +3,9 @@ server:
 spring:
   application:
     name: cards
+  output:
+    ansi:
+      enabled: always
 
   config:
     import: "optional:configserver:"
