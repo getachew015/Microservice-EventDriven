@@ -33,7 +33,7 @@ public class CustomersController {
                 CREATED, "Customer account created successfully"));
     }
 
-    @PatchMapping(path = "/v1/users/{accountId}", consumes = "application/json-patch+json", name = "Patch Customer by ID")
+    @PatchMapping(path = "/v1/accounts/{accountId}", consumes = "application/json-patch+json", name = "Patch Customer by ID")
     public ResponseEntity<SuccessMessageDto> patchCustomerById(@PathVariable Long accountId, @RequestBody JsonPatch patchCustomerDtl) {
         // Implement logic to retrieve customer by ID
         try {

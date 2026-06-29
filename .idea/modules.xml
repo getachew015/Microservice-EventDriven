@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Microservice-SpringBoot.iml" filepath="$PROJECT_DIR$/Microservice-SpringBoot.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Microservice-EventDriven.iml" filepath="$PROJECT_DIR$/Microservice-EventDriven.iml" />
     </modules>
   </component>
 </project>
