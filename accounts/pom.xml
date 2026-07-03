@@ -98,6 +98,11 @@
             <artifactId>json-patch</artifactId>
             <version>1.13</version>
         </dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>3.0.3</version> <!-- Use the latest version from Maven Central -->
+        </dependency>
     </dependencies>
     <dependencyManagement>
         <dependencies>

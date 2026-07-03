@@ -1,4 +1,5 @@
 -- Create optional custom schema if not using the default PUBLIC schema
+--SET REFERENTIAL_INTEGRITY TRUE;
 CREATE SCHEMA IF NOT EXISTS comm_banking_system;
 SET SCHEMA comm_banking_system;
 

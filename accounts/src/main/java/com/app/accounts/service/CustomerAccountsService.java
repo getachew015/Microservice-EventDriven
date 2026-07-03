@@ -52,18 +52,20 @@ public class CustomerAccountsService {
 
     //    @SneakyThrows//Throws JsonPatchException
     public void patchCustomerDetail(Long accountId, JsonPatch patchCustomerAccountDtl) {
-        AccountsEntity accountEntity = accountsRepository.findById(accountId).orElseThrow(() -> new RuntimeException("Customer Account not found !"));
-        CustomersEntity customerEntity = customersRepository.findById(accountEntity.getCustomerId()).orElseThrow(() -> new RuntimeException("Customer Detail not found !"));
-        //convert entities to dto -> PatchCustomerAccountDto
-        PatchCustomerAccountDto patchCustomerAccountDto = customerAccountsMapper.toPatchCustomerAccountDto(customerEntity, accountEntity);
-        //convert PatchCustomerAccountDto to JsonNode
-        JsonNode targetCustAccountNode = objectMapper.convertValue(patchCustomerAccountDto, JsonNode.class);
-        //Apply instructions (op, path, value) to the target JsonNode
-        JsonNode patchedCustAccountNode;
-        PatchCustomerAccountDto patchedCustAccountDto;
-        CustomersEntity patchedCustomerEntity;
-        AccountsEntity patchedAccountEntity;
         try {
+            AccountsEntity accountEntity = accountsRepository.findById(accountId)
+                    .orElseThrow(() -> new RuntimeException("Customer Account not found !"));
+            CustomersEntity customerEntity = customersRepository.findById(accountEntity.getCustomerId())
+                    .orElseThrow(() -> new RuntimeException("Customer Detail not found !"));
+            //convert entities to dto -> PatchCustomerAccountDto
+            PatchCustomerAccountDto patchCustomerAccountDto = customerAccountsMapper.toPatchCustomerAccountDto(customerEntity, accountEntity);
+            //convert PatchCustomerAccountDto to JsonNode
+            JsonNode targetCustAccountNode = objectMapper.convertValue(patchCustomerAccountDto, JsonNode.class);
+            //Apply instructions (op, path, value) to the target JsonNode
+            JsonNode patchedCustAccountNode;
+            PatchCustomerAccountDto patchedCustAccountDto;
+            CustomersEntity patchedCustomerEntity;
+            AccountsEntity patchedAccountEntity;
 
             //Convert JsonNode back to your DTO Object
             patchedCustAccountNode = patchCustomerAccountDtl.apply(targetCustAccountNode);
@@ -78,5 +80,14 @@ public class CustomerAccountsService {
             log.error("Error while patching customer account details: ", e);
             throw new RuntimeException(e);
         }
+    }
+
+    public void deleteCustomerAccount(Long accountId) {
+        AccountsEntity accountEntity = accountsRepository.findById(accountId)
+                .orElseThrow(() -> new RuntimeException("Customer Account not found !"));
+        CustomersEntity customerEntity = customersRepository.findById(accountEntity.getCustomerId())
+                .orElseThrow(() -> new RuntimeException("Customer Detail not found !"));
+        accountsRepository.delete(accountEntity);
+        customersRepository.delete(customerEntity);
     }
 }
