@@ -1,6 +1,5 @@
-package com.app.accounts.dto;
+package com.app.cards.dto;
 
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,8 +10,9 @@ import org.springframework.http.HttpStatus;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class SuccessMessageDto {
+public class ErrorMessageDto {
 
-    private HttpStatus status;
-    private String message;
+    private HttpStatus errorCode;
+    private String errorMessage;
+    private String apiPath;
 }
