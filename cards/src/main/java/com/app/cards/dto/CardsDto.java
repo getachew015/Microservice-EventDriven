@@ -26,4 +26,5 @@ public class CardsDto {
     private BigDecimal creditBalance;
     private BigDecimal cardLimit;
     private Boolean activeStatus;
+    private Boolean deletedStatus;
 }

@@ -15,4 +15,6 @@ public interface CardsRepository extends JpaRepository<CardsEntity, Long> {
 
     @Query("Select C FROM CardsEntity C WHERE C.customerId = :customerId AND right(C.cardNumber, 4) = :cardNumber")
     Optional<CardsEntity> findByCustomerIdAndLastFourDigitCardNumber(Long customerId, String cardNumber);
+    @Query("Select C FROM CardsEntity C WHERE C.customerId = :customerId AND right(C.cardNumber, 4) = :cardNumber AND C.cvv = :cvv")
+    Optional<CardsEntity> findByCardDetail(Long customerId, String cardNumber, int cvv);
 }

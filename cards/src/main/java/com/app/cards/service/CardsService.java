@@ -49,6 +49,11 @@ public class CardsService {
                 .orElseThrow(() -> new RuntimeException("Card not found for customer with Id : " + customerId + " and last four digits of card number: " + cardNumber));
     }
 
+    public CardsEntity getCardByCardDetail(Long customerId, String cardNumber, int cvv) {
+        return cardsRepository.findByCardDetail(customerId, cardNumber, cvv)
+                .orElseThrow(() -> new RuntimeException("Card not found with the given card detail customerId : " + customerId));
+    }
+
     public CardsEntity getCardByCardNumber(String cardNumber) {
         return cardsRepository.findByCardNumber(cardNumber)
                 .orElseThrow(() -> new RuntimeException("Card not found for card number: " + cardNumber));
@@ -64,19 +69,34 @@ public class CardsService {
     }
 
     public CardsDto updateCardDetails(Long customerId, String lastFourCardNum, JsonPatch patchCardDetail) {
-        CardsEntity cardsEntity = getCardByCustomerIdAndLastFourDigitCardNumber(customerId, lastFourCardNum);
-        PatchCardsDto patchCardsDto = cardsMapper.toPatchCardsDto(cardsEntity);
-        JsonNode trgtPatchCardDetail = objectMapper.convertValue(patchCardsDto, JsonNode.class);
         try {
+            CardsEntity cardsEntity = getCardByCustomerIdAndLastFourDigitCardNumber(customerId, lastFourCardNum);
+            if (!cardsEntity.getActiveStatus() || !cardsEntity.getDeletedStatus())
+                throw new RuntimeException("Card is either inactive or deleted. Cannot update card details!");
+            PatchCardsDto patchCardsDto = cardsMapper.toPatchCardsDto(cardsEntity);
+            JsonNode trgtPatchCardDetail = objectMapper.convertValue(patchCardsDto, JsonNode.class);
             JsonNode patchedCardDetail = patchCardDetail.apply(trgtPatchCardDetail);
             PatchCardsDto updatedPatchCardsDto = objectMapper.treeToValue(patchedCardDetail, PatchCardsDto.class);
             CardsEntity updatedCardsEntity = cardsMapper.toCardsEntityFromPatchCardsDto(updatedPatchCardsDto, cardsEntity);
             cardsRepository.save(updatedCardsEntity);
             return cardsMapper.toCardsDto(updatedCardsEntity);
         } catch (Exception e) {
-            throw new RuntimeException("Failed to apply patch to card details: " + e.getMessage(), e);
+            throw new RuntimeException("Failed to apply patch to card details: " + e.getMessage());
         }
     }
+
+    public CardsDto deleteCardAccount(Long customerId, String lastFourCardNum, int cvv) {
+        try {
+            CardsEntity cardsEntity = getCardByCardDetail(customerId, lastFourCardNum, cvv);
+            cardsEntity.setActiveStatus(false);
+            cardsEntity.setDeletedStatus(true);
+            cardsRepository.save(cardsEntity);
+            return cardsMapper.toCardsDto(cardsEntity);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to delete card account: " + e.getMessage());
+        }
+    }
+
     private CardsDto populateCardDetails(NewCardDto newCardDto) {
         CardsDto cardsDto = cardsMapper.toCardsDtoFromNewCardDto(newCardDto);
         // Generate a random card number

@@ -72,7 +72,7 @@ public class CardsController {
     public ResponseEntity<?> patchCardAccountDetail(@RequestParam Long customerId,
                                                     @RequestParam String lastFourCardNumber,
                                                     @RequestBody JsonPatch cardAccountDetail) {
-        //Call the service to open card account
+        //Call service to update card account
         try {
             CardsDto updatedCard = cardsService.updateCardDetails(customerId, lastFourCardNumber, cardAccountDetail);
             log.info("Card detail updated successfully for customerId : {} and last four digits of card number : {} ", updatedCard.getCustomerId(), lastFourCardNumber);
@@ -85,8 +85,21 @@ public class CardsController {
         }
     }
 
-    //Create a new card
-    //Update Card record
-    //Delete Card record
+    @DeleteMapping(path = "/v1/cards/", name = "Get Cards by Customer ID")
+    public ResponseEntity<?> patchCardAccountDetail(@RequestParam Long customerId,
+                                                    @RequestParam String lastFourCardNumber,
+                                                    @RequestParam int cvvNumber) {
+        //Call service to delete card account
+        try {
+            CardsDto deletedCard = cardsService.deleteCardAccount(customerId, lastFourCardNumber, cvvNumber);
+            log.info("Card detail deleted successfully for customerId : {} and last four digits of card number : {} ", deletedCard.getCustomerId(), lastFourCardNumber);
+            return ResponseEntity.status(NO_CONTENT).body(new SuccessMessageDto(NO_CONTENT, "Card Account deleted successfully : "));
+        } catch (RuntimeException e) {
+            log.error("Error deleting card detail ... " + e);
+            String location = ServletUriComponentsBuilder.fromCurrentRequest().build().getPath();
+            return ResponseEntity.internalServerError()
+                    .body(new ErrorMessageDto(INTERNAL_SERVER_ERROR, e.getMessage(), location));
+        }
+    }
 
 }

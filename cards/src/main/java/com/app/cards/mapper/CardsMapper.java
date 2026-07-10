@@ -31,6 +31,8 @@ public interface CardsMapper {
     @Mapping(target = "customerId", source = "customerId")
     @Mapping(target = "cardLimit", source = "cardLimit")
     @Mapping(target = "cardType", source = "cardType")
+    @Mapping(target = "activeStatus", expression = "java(true)")
+    @Mapping(target = "deletedStatus", expression = "java(false)")
     CardsDto toCardsDtoFromNewCardDto(NewCardDto newCardDto);
 
     @Mapping(target = "customerId", source = "customerId")
@@ -47,6 +49,7 @@ public interface CardsMapper {
     @Mapping(target = "creditBalance", expression = "java(patchCardsDto.getCreditBalance() != null ? patchCardsDto.getCreditBalance() : existingEntity.getCreditBalance())")
     @Mapping(target = "cardLimit", expression = "java(patchCardsDto.getCardLimit() != null ? patchCardsDto.getCardLimit() : existingEntity.getCardLimit())")
     @Mapping(target = "activeStatus", expression = "java(patchCardsDto.getActiveStatus() != null ? patchCardsDto.getActiveStatus() : existingEntity.getActiveStatus())")
+    @Mapping(target = "deletedStatus", expression = "java(patchCardsDto.getDeletedStatus() != null ? patchCardsDto.getDeletedStatus() : existingEntity.getDeletedStatus())")
     @Mapping(target = "updatedDate", expression = "java(java.time.LocalDateTime.now())")
     @Mapping(target = "updatedBy", expression = "java(\"USER\")")
     CardsEntity toCardsEntityFromPatchCardsDto(PatchCardsDto patchCardsDto, CardsEntity existingEntity);

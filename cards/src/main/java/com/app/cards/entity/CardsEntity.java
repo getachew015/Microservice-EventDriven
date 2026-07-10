@@ -39,4 +39,6 @@ public class CardsEntity extends BaseEntity {
     private BigDecimal cardLimit;
     @Column(name = "is_active")
     private Boolean activeStatus;
+    @Column(name = "is_deleted")
+    private Boolean deletedStatus;
 }

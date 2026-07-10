@@ -21,7 +21,7 @@ CREATE TABLE customersTbl (
     updated_at TIMESTAMP WITH TIME ZONE,
     CONSTRAINT pk_customers PRIMARY KEY (customer_id),
     CONSTRAINT uq_customer_email UNIQUE (email),
-    CONSTRAINT chk_customer_status CHECK (status IN ('ACTIVE', 'SUSPENDED', 'INACTIVE', 'DELETED'))
+    CONSTRAINT chk_customer_status CHECK (status IN ('ACTIVE', 'SUSPENDED', 'PENDING', 'INACTIVE', 'DELETED'))
 );
 
 -- 2. Accounts Table (Linked to Customers via Foreign Key)

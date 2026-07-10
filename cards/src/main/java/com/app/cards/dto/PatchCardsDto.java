@@ -23,4 +23,5 @@ public class PatchCardsDto {
     private BigDecimal creditBalance;
     private BigDecimal cardLimit;
     private Boolean activeStatus;
+    private Boolean deletedStatus;
 }

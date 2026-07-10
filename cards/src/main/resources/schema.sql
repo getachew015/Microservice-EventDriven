@@ -17,6 +17,7 @@ CREATE TABLE CardsTbl (
     credit_balance DECIMAL(15, 2) DEFAULT 0.00,
     card_limit DECIMAL(15, 2) NOT NULL,
     is_active BOOLEAN DEFAULT TRUE,
+    is_deleted BOOLEAN DEFAULT FALSE,
     created_by VARCHAR(50),
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_by VARCHAR(50) ,
