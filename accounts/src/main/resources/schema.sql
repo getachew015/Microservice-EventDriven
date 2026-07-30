@@ -15,6 +15,10 @@ CREATE TABLE customersTbl (
     email VARCHAR(100) NOT NULL,
     phone_number VARCHAR(20),
     status VARCHAR(15) DEFAULT 'ACTIVE',
+    street_address VARCHAR(50),
+    city VARCHAR(50),
+    state VARCHAR(2),
+    zip_code VARCHAR(5),
     created_by VARCHAR(50),
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_by VARCHAR(50),
@@ -47,5 +51,5 @@ CREATE TABLE accountsTbl (
 CREATE INDEX idx_customers_email ON customersTbl(email);
 CREATE INDEX idx_accounts_customer ON accountsTbl(customer_id);
 CREATE INDEX idx_accounts_number ON accountsTbl(account_number);
-CREATE SEQUENCE IF NOT EXISTS COMM_BANKING_SYSTEM.customer_sequence START WITH 1001 INCREMENT BY 1;
+CREATE SEQUENCE IF NOT EXISTS COMM_BANKING_SYSTEM.customer_sequence START WITH 10111 INCREMENT BY 1;
 

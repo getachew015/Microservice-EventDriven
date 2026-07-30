@@ -2,17 +2,16 @@ package com.app.accounts.dto;
 
 import lombok.Data;
 
-import java.util.List;
-
 @Data
-public class CustomerAccountDto {
+public class CustomerProfileDto extends AddressDto{
 
     private Long customerId;
     private String firstName;
     private String lastName;
     private String email;
     private String phoneNumber;
-    private List<AccountDto> accounts;
+    //    private String accountNumber;
+//    private String accountType;
+//    private String balance;
 
 }
-

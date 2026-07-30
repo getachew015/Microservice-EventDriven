@@ -1,17 +1,17 @@
 INSERT INTO COMM_BANKING_SYSTEM.CUSTOMERSTBL
-(CUSTOMER_ID, FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, STATUS, CREATED_BY, CREATED_AT, UPDATED_BY, UPDATED_AT)
+(CUSTOMER_ID, FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, STATUS, STREET_ADDRESS, CITY, STATE, ZIP_CODE, CREATED_BY, CREATED_AT, UPDATED_BY, UPDATED_AT)
     VALUES
-(1000,'John','Doe', 'john.doe@email.com', '513-555-0199', 'ACTIVE', 'SYSTEM', CURRENT_TIMESTAMP, 'SYSTEM', CURRENT_TIMESTAMP ),
-(1001, 'Alice', 'Smith', 'alice.smith@gmail.com', '214-555-0101', 'ACTIVE', 'system', '2025-01-15 08:30:00', 'system', '2025-01-15 08:30:00'),
-(1002, 'Bob', 'Jones', 'bjones@yahoo.com', '469-555-0202', 'INACTIVE', 'system', '2025-02-10 14:15:00', 'admin_jdoe', '2026-06-12 09:45:00'),
-(1003, 'Charlie', 'Brown', 'cbrown@gmail.com', '972-555-0303', 'PENDING', 'system', '2026-06-25 11:00:00', 'system', '2026-06-25 11:00:00'),
-(1004, 'Diana', 'Prince', 'dprince@themyscira.gov', '214-555-0404', 'ACTIVE', 'admin_jdoe', '2025-03-05 09:20:00', 'admin_jdoe', '2026-01-18 16:10:00'),
-(1005, 'Ethan', 'Hunt', 'e.hunt@imf.org', '469-555-0505', 'SUSPENDED', 'system', '2025-07-22 17:45:00', 'system', '2026-04-05 10:00:00'),
-(1006, 'Fiona', 'Gallagher', 'figalla@southside.com', '972-555-0606', 'ACTIVE', 'system', '2026-04-12 12:00:00', 'system', '2026-04-12 12:00:00'),
-(1007, 'George', 'Costanza', 'art.vandelay@vandelay.com', '214-555-0707', 'INACTIVE', 'admin_jdoe', '2025-08-01 10:05:00', 'admin_jdoe', '2026-05-14 14:30:00'),
-(1008, 'Hannah', 'Abbott', 'hannah.abbott@hogwarts.edu', '469-555-0808', 'PENDING', 'system', '2026-07-08 08:00:00', 'system', '2026-07-08 08:00:00'),
-(1009, 'Ian', 'Malcolm', 'chaos@math.com', '972-555-0909', 'ACTIVE', 'system', '2025-11-11 15:50:00', 'system', '2026-02-21 11:15:00'),
-(1011, 'Julia', 'Child', 'jchild@bonappetit.com', '214-555-1010', 'ACTIVE', 'admin_jdoe', '2026-01-05 13:25:00', 'admin_jdoe', '2026-06-30 09:00:00');
+(1000,'John','Doe', 'john.doe@email.com', '513-555-0199', 'ACTIVE', '203 Rose Garden Ln','BentonVille','AR','72423','SYSTEM', CURRENT_TIMESTAMP, 'SYSTEM', CURRENT_TIMESTAMP ),
+(1001, 'Alice', 'Smith', 'alice.smith@gmail.com', '214-555-0101', 'ACTIVE', '104 Maple Leaf Dr','Fayetteville','AR','72701','system', '2025-01-15 08:30:00', 'system', '2025-01-15 08:30:00'),
+(1002, 'Bob', 'Jones', 'bjones@yahoo.com', '469-555-0202', 'INACTIVE', '789 Pine Needle Way','Hot Springs','AR','71901','system', '2025-02-10 14:15:00', 'admin_jdoe', '2026-06-12 09:45:00'),
+(1003, 'Charlie', 'Brown', 'cbrown@gmail.com', '972-555-0303', 'PENDING', '412 Oak Ridge Rd','Dallas','TX','75243','system', '2026-06-25 11:00:00', 'system', '2026-06-25 11:00:00'),
+(1004, 'Diana', 'Prince', 'dprince@themyscira.gov', '214-555-0404', 'ACTIVE', '555 Willow Creek Ct','Jonesboro','AR','72401','admin_jdoe', '2025-03-05 09:20:00', 'admin_jdoe', '2026-01-18 16:10:00'),
+(1005, 'Ethan', 'Hunt', 'e.hunt@imf.org', '469-555-0505', 'SUSPENDED', '1420 Cedar Valley Dr','Plano','TX','75074','system', '2025-07-22 17:45:00', 'system', '2026-04-05 10:00:00'),
+(1006, 'Fiona', 'Gallagher', 'figalla@southside.com', '972-555-0606', 'ACTIVE', '1420 Cedar Valley Dr','Rogers','AR','72756','system', '2026-04-12 12:00:00', 'system', '2026-04-12 12:00:00'),
+(1007, 'George', 'Costanza', 'art.vandelay@vandelay.com', '214-555-0707', 'INACTIVE', '','','','','admin_jdoe', '2025-08-01 10:05:00', 'admin_jdoe', '2026-05-14 14:30:00'),
+(1008, 'Hannah', 'Abbott', 'hannah.abbott@hogwarts.edu', '469-555-0808', 'PENDING', '231 River Birch Ln','Searcy','AR','72143','system', '2026-07-08 08:00:00', 'system', '2026-07-08 08:00:00'),
+(1009, 'Ian', 'Malcolm', 'chaos@math.com', '972-555-0909', 'ACTIVE', '605 Elmwood Park Rd','Dallas','TX','75228','system', '2025-11-11 15:50:00', 'system', '2026-02-21 11:15:00'),
+(1011, 'Julia', 'Child', 'jchild@bonappetit.com', '214-555-1010', 'ACTIVE', '909 Magnolia St','Springdale','AR','72762','admin_jdoe', '2026-01-05 13:25:00', 'admin_jdoe', '2026-06-30 09:00:00');
 
 INSERT INTO COMM_BANKING_SYSTEM.ACCOUNTSTBL
 (ACCOUNT_ID, CUSTOMER_ID, ACCOUNT_NUMBER, ACCOUNT_TYPE, BALANCE, STATUS, CREATED_BY, CREATED_AT, UPDATED_BY, UPDATED_AT)

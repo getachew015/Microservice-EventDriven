@@ -1,7 +1,8 @@
 package com.app.accounts.mapper;
 
 import com.app.accounts.dto.CustomerAccountDto;
-import com.app.accounts.dto.CustomerDto;
+import com.app.accounts.dto.CustomerProfileDto;
+import com.app.accounts.dto.NewCustomerDto;
 import com.app.accounts.dto.PatchCustomerAccountDto;
 import com.app.accounts.entity.AccountsEntity;
 import com.app.accounts.entity.CustomersEntity;
@@ -18,7 +19,11 @@ public interface CustomerAccountsMapper {
 
     @Mapping(target = "customerId", source = "customer.customerId")
     @Mapping(target = "email", qualifiedByName = "maskEmail")
-    CustomerAccountDto toCustomerAccountDto(CustomersEntity customer, AccountsEntity account);
+    CustomerAccountDto toCustomerAccountDto(CustomersEntity customer);
+
+    @Mapping(target = "customerId", source = "customer.customerId")
+    @Mapping(target = "email", qualifiedByName = "maskEmail")
+    CustomerProfileDto toCustomerProfileDto(CustomersEntity customer, AccountsEntity account);
 
     @Mapping(target = "customerStatus", source = "customer.status")
     @Mapping(target = "accountStatus", source = "account.status")
@@ -28,13 +33,13 @@ public interface CustomerAccountsMapper {
     @Mapping(target = "createdBy", expression = "java(\"SYSTEM\")")
     @Mapping(target = "updatedDate", expression = "java(java.time.LocalDateTime.now())")
     @Mapping(target = "updatedBy", expression = "java(\"SYSTEM\")")
-    AccountsEntity toAccountEntity(CustomerDto customer);
+    AccountsEntity toAccountEntity(NewCustomerDto customer);
 
     @Mapping(target = "createdDate", expression = "java(java.time.LocalDateTime.now())")
     @Mapping(target = "createdBy", expression = "java(\"SYSTEM\")")
     @Mapping(target = "updatedDate", expression = "java(java.time.LocalDateTime.now())")
     @Mapping(target = "updatedBy", expression = "java(\"SYSTEM\")")
-    CustomersEntity toCustomerEntity(CustomerDto customer);
+    CustomersEntity toCustomerEntity(NewCustomerDto customer);
 
     @Mapping(target = "status", expression = "java(customerAccountDto.getAccountStatus() != null ? customerAccountDto.getAccountStatus() : oldAccountEntity.getStatus())")
     @Mapping(target = "balance", expression = "java(customerAccountDto.getBalance() != null ? new java.math.BigDecimal(customerAccountDto.getBalance()) : oldAccountEntity.getBalance())")

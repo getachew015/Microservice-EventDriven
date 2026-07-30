@@ -1,8 +1,6 @@
 package com.app.accounts.service;
 
-import com.app.accounts.dto.CustomerAccountDto;
-import com.app.accounts.dto.CustomerDto;
-import com.app.accounts.dto.PatchCustomerAccountDto;
+import com.app.accounts.dto.*;
 import com.app.accounts.entity.AccountsEntity;
 import com.app.accounts.entity.CustomersEntity;
 import com.app.accounts.mapper.CustomerAccountsMapper;
@@ -17,6 +15,8 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 @Service
@@ -29,7 +29,19 @@ public class CustomerAccountsService {
     private final CustomerAccountsMapper customerAccountsMapper;
     private final ObjectMapper objectMapper;
 
-    public void addNewCustomer(CustomerDto customer) {
+    public List<CustomerProfileDto> getAllCustomers(SearchCustomerDto searchCustomers) {
+
+        List<CustomersEntity> customers = customersRepository.findAll(CustomersSpecifications.findCustomers(searchCustomers));
+        List<CustomerProfileDto> customerAccounts = new ArrayList<>();
+        for (CustomersEntity customer : customers) {
+            AccountsEntity account = accountsRepository.findFirstByCustomerId(customer.getCustomerId()).orElse(null);
+            CustomerProfileDto customerProfileDto = customerAccountsMapper.toCustomerProfileDto(customer, account);
+            customerAccounts.add(customerProfileDto);
+        }
+        return customerAccounts;
+    }
+
+    public void addNewCustomer(NewCustomerDto customer) {
 
         CustomersEntity customerEntity = customerAccountsMapper.toCustomerEntity(customer);
         AccountsEntity accountEntity = customerAccountsMapper.toAccountEntity(customer);
@@ -46,8 +58,13 @@ public class CustomerAccountsService {
         accountsRepository.save(accountEntity);
     }
 
-    public CustomerAccountDto findCustomerById(Long customerId) {
-        return customerAccountsMapper.toCustomerAccountDto(customersRepository.findById(customerId).orElse(null), accountsRepository.findFirstByCustomerId(customerId).orElse(null));
+    public CustomerProfileDto findCustomerProfileById(Long customerId) {
+        return customerAccountsMapper.toCustomerProfileDto(customersRepository.findById(customerId).orElse(null), accountsRepository.findFirstByCustomerId(customerId).orElse(null));
+    }
+
+    public CustomerAccountDto findCustomerAcctDetailById(Long customerId) {
+        CustomersEntity customersEntity = customersRepository.findByCustomerId(customerId).orElse(null);
+        return customerAccountsMapper.toCustomerAccountDto(customersEntity);
     }
 
     //    @SneakyThrows//Throws JsonPatchException

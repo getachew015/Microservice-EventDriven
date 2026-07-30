@@ -13,14 +13,18 @@ spring:
     username: user
     password:
     driverClassName: org.h2.Driver
+
   jpa:
     spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
     properties:
       hibernate:
         show_sql: false
         format_sql: false
+        default_schema: comm_banking_system
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
   h2:
     console:
       enabled: true

@@ -27,5 +27,9 @@ public class AccountsEntity extends BaseEntity {
     private BigDecimal balance; //NUMERIC(15, 2) DEFAULT 0.00,
     @Column
     private String status = "OPEN";// VARCHAR(15) DEFAULT 'OPEN',
+    // Defines the owning side of the relationship
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "customerId", nullable = false, insertable = false, updatable = false)
+    private CustomersEntity customer;
 
 }

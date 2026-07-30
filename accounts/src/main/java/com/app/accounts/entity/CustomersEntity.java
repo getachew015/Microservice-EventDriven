@@ -34,8 +34,20 @@ public class CustomersEntity extends BaseEntity {
     private String email; //VARCHAR(100) NOT NULL,
     @Column
     private String phoneNumber;// VARCHAR(20),
+    @Column(name = "STREET_ADDRESS")
+    private String streetAddress;// VARCHAR(20),
+    @Column
+    private String city;// VARCHAR(20),
+    @Column
+    private String state;// VARCHAR(20),
+    @Column(name = "ZIP_CODE")
+    private String zipCode;// VARCHAR(20),
     @JsonProperty()
     @Column
     private String status = "ACTIVE";// VARCHAR(15) DEFAULT 'ACTIVE',
+    // Configures the one-to-many relationship
+    @OneToMany(mappedBy = "customerId",
+            cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<AccountsEntity> accounts;
 
 }
