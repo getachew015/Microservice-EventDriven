@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @ToString
 @Entity
 @Table(name = "LoansTbl")
-public class LoansEntity extends BaseEntity {
+public class LoanAccountEntity extends BaseEntity {
     /*
     loan_id BIGINT,
     customer_id BIGINT NOT NULL,

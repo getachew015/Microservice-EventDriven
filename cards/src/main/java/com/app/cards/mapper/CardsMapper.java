@@ -7,8 +7,6 @@ import com.app.cards.entity.CardsEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-import java.math.BigDecimal;
-
 import static org.mapstruct.MappingConstants.ComponentModel.SPRING;
 import static org.mapstruct.ReportingPolicy.IGNORE;
 
