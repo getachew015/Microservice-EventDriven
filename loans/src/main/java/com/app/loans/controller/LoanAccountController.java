@@ -6,6 +6,7 @@ import com.app.loans.dto.NewLoanDto;
 import com.app.loans.dto.SuccessMessageDto;
 import com.app.loans.entity.LoanAccountEntity;
 import com.app.loans.service.LoanAccountService;
+import com.github.fge.jsonpatch.JsonPatch;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +31,27 @@ public class LoanAccountController {
         LoanAccountEntity createdLoanAcct = loanAccountService.createLoanAccount(newLoanDto);
         return ResponseEntity.status(CREATED).body(new SuccessMessageDto(
                 CREATED, "Loan account created successfully" + createdLoanAcct.getLoanId()));
+    }
+
+    @PatchMapping(path = "/v1/loans", name = "Update a loan Account")
+    public ResponseEntity<?> patchCustomerLoanAccount(@RequestParam Long loanId,
+                                                      @RequestBody JsonPatch loanAccountDetail) {
+        // Create a new customer account
+        try {
+            LoanAccountDto loanAccountDto = loanAccountService.updateLoanAccount(loanId, loanAccountDetail);
+            if (loanAccountDto == null)
+                return ResponseEntity.status(NOT_FOUND).body(
+                        new SuccessMessageDto(NOT_FOUND, "Loan accounts not found for loanId: " + loanId));
+            else
+                return ResponseEntity.status(OK).body(loanAccountDto);
+        } catch (Exception e) {
+            String location = ServletUriComponentsBuilder.fromCurrentRequest().build().getPath();
+            log.error("Error occurred while updating loan account with loanId: {}", loanId, e);
+            return ResponseEntity.status(INTERNAL_SERVER_ERROR).body(new ErrorMessageDto(
+                    INTERNAL_SERVER_ERROR,
+                    "An error occurred while updating the loan account.", location));
+        }
+
     }
 
     @GetMapping(path = "/v1/customer/loans", name = "Find a customer loan Accounts")

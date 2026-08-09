@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Getter
@@ -13,6 +14,6 @@ public class NewLoanDto {
 
     private Long customerId;
     private String loanType;
-    private String principalAmount;
+    private BigDecimal principalAmount;
 
 }

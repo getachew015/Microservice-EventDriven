@@ -1,5 +1,6 @@
 package com.app.loans.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Column;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,7 +19,9 @@ public class LoanAccountDto {
     private String loanType;
     private BigDecimal principalAmount;
     private float interestRate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private LocalDateTime startDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private LocalDateTime endDate;
     private Boolean activeStatus;
     private Boolean deletedStatus;
